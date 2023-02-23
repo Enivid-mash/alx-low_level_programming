@@ -5,10 +5,10 @@
  * @a: the function parameter
  * @b: the second parameter
  *
- * Return: sum
+ * Return: pd 
  */
 int mul(int a, int b)
 {
-	pd = a * b;
+	int pd = a * b;
 	return (pd);
 }
