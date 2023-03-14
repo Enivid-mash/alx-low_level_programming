@@ -11,7 +11,7 @@
 char *create_array(unsigned int size, char c)
 {
 	unsigned int i = 0;
-	char *pc = NULL;
+	char *pc;
 
 	if (size == 0)
 		return (NULL);
@@ -20,10 +20,9 @@ char *create_array(unsigned int size, char c)
 
 	if (pc == NULL)
 		return (NULL);
-	while (*pc)
-	{
+
+	for (i = 0; i < size; i++)
 		pc[i] = c;
-		c++;
-	}
+
 	return (pc);
 }
