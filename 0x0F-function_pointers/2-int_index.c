@@ -5,7 +5,7 @@
  *@array: input array
  *@size: size of an array
  *@cmp: comparison function
- *Return: integer 
+ *Return: integer
  */
 int int_index(int *array, int size, int (*cmp)(int))
 {
