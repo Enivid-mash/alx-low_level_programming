@@ -14,7 +14,7 @@ unsigned int binary_to_uint(const char *b)
 	unsigned int b2 = 0;
 	const char *b1 = b;
 
-	if (*b1 == NULL)
+	if (!b1)
 		return (0);
 
 	/* the number of binary digits in the input string */
