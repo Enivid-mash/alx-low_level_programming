@@ -1,19 +1,25 @@
 #include "lists.h"
 
 /**
- * get_tempint_at_index - returns the nth temp of a listint_t linked list.
+ * get_nodeint_at_index - gives nth node of a listint_t linked list
+ * @head: head
+ * @index: index of the node
  *
- * @head: head temp pointer
- * @index: index
- *
- * Return: temp
- */
-listint_t *get_tempint_at_index(listint_t *head, unsigned int index)
+ * Return: address of nth node
+ **/
+listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 {
-	unsigned int i;
-	listint_t *temp;
+	listint_t *current_node;
 
-	for (temp = head, i = 0; temp && i < index; temp = (*temp).next, i++)
-		;
-	return (temp);
+	register uint count = 0;
+
+	current_node = head;
+	while (current_node)
+	{
+		if (count == index)
+			return (current_node);
+		count++;
+		current_node = (*current_node).next;
+	}
+	return (current_node);
 }
