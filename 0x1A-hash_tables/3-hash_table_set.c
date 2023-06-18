@@ -1,43 +1,6 @@
 #include "hash_tables.h"
 
 /**
- * add_n_hash - adds a node at the beginning of a hash at index
- *
- * @head: head of hash linked list.
- * @key: key of hash
- * @value: value to store
- *
- * Return: head of hash
- */
-hash_node_t *add_n_hash(hash_node_t **head, const char *key, const char *value)
-{
-	hash_node_t *tmp = *head;
-
-	while (tmp != NULL)
-	{
-		if (strcmp(key, tmp->key) == 0)
-		{
-			free(tmp->value);
-			tmp->value = strdup(value);
-			return (*head);
-		}
-		tmp = tmp->next;
-	}
-
-	tmp = malloc(sizeof(hash_node_t));
-
-	if (tmp == NULL)
-		return (NULL);
-
-	tmp->key = strdup(key);
-	tmp->value = strdup(value);
-	tmp->next = *head;
-	*head = tmp;
-
-	return (*head);
-}
-
-/**
  * hash_table_set - adds an element to hash table
  *
  * @ht: pointer to hash table
@@ -48,15 +11,21 @@ hash_node_t *add_n_hash(hash_node_t **head, const char *key, const char *value)
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int k_index;
+	unsigned long int index = hash_djb2((const unsigned char *)key) % ht->size;
+	hash_node_t *new_node = malloc(sizeof(hash_node_t));
+
 
 	if (ht == NULL || key == NULL || *key == '\0')
 		return (0);
 
-	k_index = hash_djb2((const unsigned char *)key) % ht->size;
 
-	if (add_n_hash(&(ht->array[k_index]), key, value) == NULL)
+	if (new_node == NULL)
 		return (0);
+
+	new_node->key = strdup(key);
+	new_node->value = strdup(value);
+	new_node->next = ht->array[index];
+	ht->array[index] = new_node;
 
 	return (1);
 }
