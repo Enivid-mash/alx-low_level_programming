@@ -53,7 +53,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	if (ht == NULL || key == NULL || *key == '\0')
 		return (0);
 
-	k_index = key_index((unsigned char *)key, ht->size);
+	k_index = hash_djb2((const unsigned char *)key) % ht->size;
 
 	if (add_n_hash(&(ht->array[k_index]), key, value) == NULL)
 		return (0);
