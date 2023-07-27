@@ -1,0 +1,19 @@
+# Compiler
+CC = gcc
+
+# Source files
+SRC = main.c school.c
+
+# Name of the executable
+EXECUTABLE = school
+
+# Default rule: build the executable
+all: $(EXECUTABLE)
+
+# Rule to build the executable
+$(EXECUTABLE): $(SRC)
+	$(CC) $(SRC) -o $(EXECUTABLE)
+
+# Clean rule: remove the executable
+clean:
+	rm -f $(EXECUTABLE)
